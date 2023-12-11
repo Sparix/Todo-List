@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="d-flex space_between">
+    <h1>Task List</h1>
+    <h2><a href="{% url 'tasks:create-task' %}">CREATE TASK</a></h2>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Content</th>
+      <th>deadline</th>
+      <th>is_completed</th>
+      <th>tags</th>
+      <th>UPDATE</th>
+      <th>DELETE</th>
+
+    </tr>
+    {% for task in task_list %}
+      <tr>
+        <td>{{ task.content }}</td>
+        <td>{{ task.deadline }}</td>
+        <td><a href="{% url "tasks:task-status" task.pk %}" class="btn {% if task.is_completed %}btn-success{% else %}btn-danger{% endif %}">{{ task.is_completed }}</a></td>
+        <td>{% for tag in task.tags.all %} <p>{{ tag.name }} </p> {% endfor %}</td>
+        <td><a class="btn btn-primary" href="{% url "tasks:update-task" task.pk %}">UPDATE</a></td>
+        <td><a class="btn btn-danger" href="{% url "tasks:task-delete" task.pk %}">DELETE</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
