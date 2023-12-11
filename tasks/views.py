@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -43,10 +43,7 @@ class UpdateTagView(generic.UpdateView):
 
 def change_status_tasks(request, pk):
     task = Task.objects.get(id=pk)
-    if task.is_completed:
-        task.is_completed = False
-    else:
-        task.is_completed = True
+    task.is_completed = not task.is_completed
     task.save()
     return redirect("tasks:home-page")
 
