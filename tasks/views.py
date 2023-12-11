@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .models import Task, Tags
+from tasks.models import Task, Tags
 
 
 # Create your views here.
